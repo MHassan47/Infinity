@@ -4,6 +4,7 @@ import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import MenuScreen from "../screens/MenuScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecipesScreen from "../screens/RecipesScreen";
+import RecipeItemScreen from "../screens/RecipeItemScreen";
 const Tab = createBottomTabNavigator();
 
 const RecipeStack = createNativeStackNavigator();
@@ -25,8 +26,12 @@ export const RecipeScreenStack = () => {
         component={RecipesScreen}
         options={{ headerShown: false }}
       />
-      {/* <RecipeStack.Screen name="Profile" component={Profile} />
-      <RecipeStack.Screen name="Settings" component={Settings} /> */}
+      <RecipeStack.Screen
+        name="Item"
+        component={RecipeItemScreen}
+        options={{ headerShown: false, presentation: "modal" }}
+      />
+      {/* <RecipeStack.Screen name="Settings" component={Settings} /> */}
     </RecipeStack.Navigator>
   );
 };
