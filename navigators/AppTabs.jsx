@@ -14,9 +14,17 @@ export const RecipeScreenStack = () => {
       <RecipeStack.Screen
         name="Menu"
         component={MenuScreen}
-        screenOptions={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          headerTitle: "Recipes",
+          headerTintColor: "#005a84",
+        }}
       />
-      <RecipeStack.Screen name="Recipe" component={RecipesScreen} />
+      <RecipeStack.Screen
+        name="Recipe"
+        component={RecipesScreen}
+        options={{ headerShown: false }}
+      />
       {/* <RecipeStack.Screen name="Profile" component={Profile} />
       <RecipeStack.Screen name="Settings" component={Settings} /> */}
     </RecipeStack.Navigator>
