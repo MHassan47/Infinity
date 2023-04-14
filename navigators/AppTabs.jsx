@@ -1,8 +1,27 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "../screens/ProfileScreen";
-import RecipesScreen from "../screens/RecipesScreen";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import MenuScreen from "../screens/MenuScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RecipesScreen from "../screens/RecipesScreen";
 const Tab = createBottomTabNavigator();
+
+const RecipeStack = createNativeStackNavigator();
+
+export const RecipeScreenStack = () => {
+  return (
+    <RecipeStack.Navigator>
+      <RecipeStack.Screen
+        name="Menu"
+        component={MenuScreen}
+        screenOptions={{ headerShown: false }}
+      />
+      <RecipeStack.Screen name="Recipe" component={RecipesScreen} />
+      {/* <RecipeStack.Screen name="Profile" component={Profile} />
+      <RecipeStack.Screen name="Settings" component={Settings} /> */}
+    </RecipeStack.Navigator>
+  );
+};
 
 export const AppTabs = () => {
   return (
@@ -29,7 +48,12 @@ export const AppTabs = () => {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Recipes" component={RecipesScreen} />
+      <Tab.Screen
+        name="Recipes"
+        component={RecipeScreenStack}
+        // screenOptions={{ headerShown: true }}
+        options={{ title: "Recipes" }}
+      />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
