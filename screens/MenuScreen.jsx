@@ -11,8 +11,11 @@ import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
 const MenuScreen = () => {
+  const navigation = useNavigation();
+
   const [categories, setCategories] = useState([]);
   const recipesRef = collection(db, "Recipes");
 
@@ -55,6 +58,9 @@ const MenuScreen = () => {
             <TouchableOpacity
               key={category.id}
               className="w-1/2 mb-4 shadow-lg "
+              onPress={() =>
+                navigation.navigate("Recipe", { category: category.id })
+              }
             >
               <Image
                 source={{ uri: category.image }}
