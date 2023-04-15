@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      InfinityBlue: "#005a84",
+    },
   },
   plugins: [],
 };
