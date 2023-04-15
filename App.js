@@ -1,7 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, Text, View } from "react-native";
 import Routes from "./Routes";
+import { UserProvider } from "./userContext";
 
 export default function App() {
-  return <Routes />;
+  return (
+    <UserProvider>
+      <Routes />
+    </UserProvider>
+  );
 }
