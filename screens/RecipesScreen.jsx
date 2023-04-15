@@ -10,8 +10,10 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 const RecipesScreen = ({ route }) => {
   const { category } = route.params;
+  const navigation = useNavigation();
   //   console.log("----------", typeof category);
   const [recipes, setRecipes] = useState([]);
   const recipeListRef = collection(db, "Items");
@@ -44,6 +46,7 @@ const RecipesScreen = ({ route }) => {
           <TouchableOpacity
             key={item.title}
             className="flex justify-center items-center w-full mb-4 shadow-2xl"
+            onPress={() => navigation.navigate("Item", { item: item })}
           >
             <Image
               source={{ uri: item.image }}
