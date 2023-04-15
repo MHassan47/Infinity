@@ -5,11 +5,15 @@ import MenuScreen from "../screens/MenuScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecipesScreen from "../screens/RecipesScreen";
 import RecipeItemScreen from "../screens/RecipeItemScreen";
+import { Button } from "react-native";
+import { useContext } from "react";
+import { UserContext } from "../userContext";
+
 const Tab = createBottomTabNavigator();
-
 const RecipeStack = createNativeStackNavigator();
+const ExerciseStack = createNativeStackNavigator();
 
-export const RecipeScreenStack = () => {
+const RecipeScreenStack = () => {
   return (
     <RecipeStack.Navigator>
       <RecipeStack.Screen
@@ -37,6 +41,8 @@ export const RecipeScreenStack = () => {
 };
 
 export const AppTabs = () => {
+  const { logout } = useContext(UserContext);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -67,7 +73,17 @@ export const AppTabs = () => {
         // screenOptions={{ headerShown: true }}
         options={{ title: "Recipes" }}
       />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: "#005a84",
+          headerRight: () => (
+            <Button onPress={logout} title="Logout" color="black" />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
