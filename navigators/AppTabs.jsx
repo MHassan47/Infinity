@@ -8,6 +8,9 @@ import RecipeItemScreen from "../screens/RecipeItemScreen";
 import { Button } from "react-native";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
+import ExerciseLibrary from "../screens/ExerciseLibrary";
+import ExercisesScreen from "../screens/ExercisesScreen";
+import ExerciseItemScreen from "../screens/ExerciseItemScreen";
 
 const Tab = createBottomTabNavigator();
 const RecipeStack = createNativeStackNavigator();
@@ -40,6 +43,33 @@ const RecipeScreenStack = () => {
   );
 };
 
+const ExerciseScreenStack = () => {
+  return (
+    <ExerciseStack.Navigator>
+      <ExerciseStack.Screen
+        name="ExerciseLibrary"
+        component={ExerciseLibrary}
+        options={{
+          headerShown: true,
+          headerTitle: "Library",
+          headerTintColor: "#005a84",
+        }}
+      />
+      <ExerciseStack.Screen
+        name="ExercisesScreen"
+        component={ExercisesScreen}
+        options={{ headerShown: false }}
+      />
+      <ExerciseStack.Screen
+        name="ExerciseItem"
+        component={ExerciseItemScreen}
+        options={{ headerShown: false, presentation: "modal" }}
+      />
+      {/* <RecipeStack.Screen name="Settings" component={Settings} /> */}
+    </ExerciseStack.Navigator>
+  );
+};
+
 export const AppTabs = () => {
   const { logout } = useContext(UserContext);
 
@@ -61,6 +91,14 @@ export const AppTabs = () => {
             );
           } else if (route.name === "Profile") {
             return <FontAwesome name="user" size={24} color={color} />;
+          } else if (route.name === "Exercises") {
+            return (
+              <MaterialCommunityIcons
+                name="weight-lifter"
+                size={24}
+                color={color}
+              />
+            );
           }
         },
         tabBarActiveTintColor: "#005a84",
@@ -72,6 +110,12 @@ export const AppTabs = () => {
         component={RecipeScreenStack}
         // screenOptions={{ headerShown: true }}
         options={{ title: "Recipes" }}
+      />
+      <Tab.Screen
+        name="Exercises"
+        component={ExerciseScreenStack}
+        // screenOptions={{ headerShown: true }}
+        options={{ title: "Exercises" }}
       />
       <Tab.Screen
         name="Profile"
